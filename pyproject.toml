@@ -10,10 +10,23 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "3.12.6"
+elasticsearch = {extras = ["async"], version = "^8.15.1"}
+pydantic-settings = "^2.6.1"
 
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.7.1"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+markers = [
+    "needs_elasticsearch: mark a test that needs an elasticsearch instance to run.",
+]
 
 [tool.ruff]
 target-version = "py312"

@@ -45,4 +45,26 @@ Things to keep in mind:
 
 - We use pre-commit, so don't forget to run `pre-commit install`
 
+### How to test
+
+First install the poetry environment:
+
+```sh
+poetry install
+```
+
+Some tests may require Elasticsearch to be running, these tests are
+marked with `needs_elasticsearch`:
+
+```sh
+docker-compose up --build --detach --renew-anon-volumes
+pytest
+```
+
+If you want to test something that does not require Elasticsearch:
+
+```sh
+pytest -m "not needs_elasticsearch"
+```
+
 [open-issues]: https://github.com/nramirezuy/tntw/issues
