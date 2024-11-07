@@ -15,7 +15,7 @@ There must be a better way! :smile:
 ## Roadmap
 
 - [x] Initial setup
-  - [ ] Dockerize Elasticsearch
+  - [x] Dockerize Elasticsearch
   - [ ] Dockerize FastAPI
   - [ ] Dockerize Tests?
 - [ ] Add seeding endpoint

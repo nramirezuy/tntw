@@ -1,0 +1,24 @@
+---
+name: tntw
+
+services:
+  db:
+    image: elasticsearch:8.15.3
+    restart: always
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "curl --silent --fail localhost:9200/_cluster/health || exit 1"
+      ]
+      timeout: 20s
+      retries: 10
+    environment:
+      xpack.security.enabled: false  # I'm not doing a secure install
+      discovery.type: single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
