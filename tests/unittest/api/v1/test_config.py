@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings
 
-from tntw.config import get_settings
+from tntw.api.v1.config import get_settings
 
 
 def test_settings_is_pydantic_settings(minimal_environment) -> None:
