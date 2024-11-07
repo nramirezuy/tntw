@@ -1,0 +1,40 @@
+---
+default_language_version:
+  python: python3.12.6
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: pretty-format-json
+        args: [--autofix]
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.42.0
+    hooks:
+      - id: markdownlint
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [--format, parsable, --strict]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.2
+    hooks:
+      # Run the linter.
+      - id: ruff
+        types_or: [python, pyi, jupyter]
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
+        types_or: [python, pyi, jupyter]
