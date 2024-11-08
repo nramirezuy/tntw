@@ -3,6 +3,7 @@ from typing import AsyncIterator
 
 from elasticsearch import AsyncElasticsearch
 from elasticsearch import BadRequestError
+from elasticsearch.helpers import async_bulk
 
 from .config import get_settings
 
@@ -39,3 +40,21 @@ async def create_indices(
         if exc.error != "resource_already_exists_exception":
             raise
         yield True, "movies"
+
+
+async def bulk_index(
+    documents: AsyncIterator[dict], index: str, client: AsyncElasticsearch
+) -> tuple[int, int]:
+    """Index all documents to :index:
+
+    Returns:
+        (succesful, failed): Returns all succesful/failed documents.
+    """
+    return await async_bulk(
+        client=client,
+        actions=(
+            {"_index": index, "_source": document}
+            async for document in documents
+        ),
+        stats_only=True,
+    )  # type: ignore
