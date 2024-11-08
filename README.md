@@ -30,7 +30,7 @@ Then go to `http://localhost:8000`
   - [ ] Dockerize Tests?
 - [x] Add seeding endpoint
   - [x] Build the seeding API crawler
-  - [ ] Define Elasticsearch Index schema
+  - [x] Define Elasticsearch Index schema
   - [ ] Bulk upload to Elasticsearch
 - [ ] Add search endpoint
   - [ ] No parameter behavior (full pagination?)

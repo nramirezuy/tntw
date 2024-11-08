@@ -1,11 +1,11 @@
-from typing import AsyncIterable
+from typing import AsyncIterator
 
 import httpx
 import pytest
 import pytest_asyncio
 from elasticsearch import AsyncElasticsearch
 
-from tntw.api.v1.database import get_session
+from tntw.api.v1.config import get_settings
 
 
 @pytest.fixture
@@ -14,13 +14,18 @@ def minimal_environment(monkeypatch) -> None:
 
 
 @pytest.fixture
-def elasticsearch_client(minimal_environment) -> AsyncElasticsearch:
-    return get_session()
+def settings(minimal_environment) -> None:
+    return get_settings()
 
 
 @pytest_asyncio.fixture
-async def http_client(
-    minimal_environment,
-) -> AsyncIterable[httpx.AsyncClient]:
+async def elasticsearch_client(settings) -> AsyncIterator[AsyncElasticsearch]:
+    database_url = str(settings.DATABASE_URL)
+    async with AsyncElasticsearch(hosts=[database_url]) as client:
+        yield client
+
+
+@pytest_asyncio.fixture
+async def http_client(settings) -> AsyncIterator[httpx.AsyncClient]:
     async with httpx.AsyncClient(base_url="http://localhost:8000") as client:
         yield client
