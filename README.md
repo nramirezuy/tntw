@@ -28,8 +28,8 @@ Then go to `http://localhost:8000`
   - [x] Dockerize Elasticsearch
   - [x] Dockerize FastAPI
   - [ ] Dockerize Tests?
-- [ ] Add seeding endpoint
-  - [ ] Build the seeding API crawler
+- [x] Add seeding endpoint
+  - [x] Build the seeding API crawler
   - [ ] Define Elasticsearch Index schema
   - [ ] Bulk upload to Elasticsearch
 - [ ] Add search endpoint
