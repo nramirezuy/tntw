@@ -12,11 +12,21 @@ as seeding. So I just decided to make something out of it.
 
 There must be a better way! :smile:
 
+## Usage
+
+Everything is dockerized:
+
+```sh
+docker-compose up --build --detach
+```
+
+Then go to `http://localhost:8000`
+
 ## Roadmap
 
 - [x] Initial setup
   - [x] Dockerize Elasticsearch
-  - [ ] Dockerize FastAPI
+  - [x] Dockerize FastAPI
   - [ ] Dockerize Tests?
 - [ ] Add seeding endpoint
   - [ ] Build the seeding API crawler

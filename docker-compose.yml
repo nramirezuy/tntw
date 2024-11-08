@@ -22,3 +22,21 @@ services:
       memlock:
         soft: -1
         hard: -1
+  api:
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    image: tntw-api
+    build:
+      context: .
+      target: development
+    restart: always
+    environment:
+      TNTW_DATABASE_URL: ${TNT_DATABASE_URL:-http://db:9200}
+    volumes:
+      - type: bind
+        source: src/
+        target: /app
+    ports:
+      - 8000:8000
