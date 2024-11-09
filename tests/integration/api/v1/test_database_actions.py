@@ -31,3 +31,10 @@ async def test_bulk_index(elasticsearch_client: AsyncElasticsearch) -> None:
         client=elasticsearch_client,
     )
     assert stats == (59, 0)
+    await elasticsearch_client.indices.refresh(index="movies")
+    assert (await elasticsearch_client.count(index="movies"))["count"] == 45
+    assert (
+        await elasticsearch_client.search(
+            index="movies", query={"match": {"year": 2010}}
+        )
+    )["hits"]["total"]["value"] == 1

@@ -1,4 +1,6 @@
 import functools
+import hashlib
+from typing import Any
 from typing import AsyncIterator
 
 from elasticsearch import AsyncElasticsearch
@@ -43,7 +45,9 @@ async def create_indices(
 
 
 async def bulk_index(
-    documents: AsyncIterator[dict], index: str, client: AsyncElasticsearch
+    documents: AsyncIterator[dict[str, Any]],
+    index: str,
+    client: AsyncElasticsearch,
 ) -> tuple[int, int]:
     """Index all documents to :index:
 
@@ -53,7 +57,11 @@ async def bulk_index(
     return await async_bulk(
         client=client,
         actions=(
-            {"_index": index, "_source": document}
+            {
+                "_index": index,
+                "_id": hashlib.sha256(repr(document).encode()).hexdigest(),
+                "_source": document,
+            }
             async for document in documents
         ),
         stats_only=True,
