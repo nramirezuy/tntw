@@ -20,7 +20,7 @@ def get_session() -> AsyncElasticsearch:
 
 async def create_indices(
     client: AsyncElasticsearch,
-) -> AsyncIterator[tuple[bool, str] | None]:
+) -> AsyncIterator[tuple[bool, str]]:
     """Create all necessary indices
 
     Returns:
