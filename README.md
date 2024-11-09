@@ -36,6 +36,7 @@ Then go to `http://localhost:8000`
   - [ ] No parameter behavior (full pagination?)
   - [ ] Add year filter
   - [ ] Add title filter
+- [ ] Snapshot testing
 - [ ] What next?
 
 See the [open issues][open-issues] for a full list of
