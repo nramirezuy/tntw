@@ -24,6 +24,10 @@ async def elasticsearch_client(settings) -> AsyncIterator[AsyncElasticsearch]:
     async with AsyncElasticsearch(hosts=[database_url]) as client:
         yield client
 
+        # Clean all indices
+        for index in await client.indices.get(index="*"):
+            await client.indices.delete(index=index)
+
 
 @pytest_asyncio.fixture
 async def http_client(settings) -> AsyncIterator[httpx.AsyncClient]:
