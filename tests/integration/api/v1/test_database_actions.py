@@ -1,19 +1,22 @@
 from typing import AsyncIterator
 
 import pytest
+from elasticsearch import AsyncElasticsearch
 
 from tntw.api.v1 import database
 
 
 @pytest.mark.asyncio
-async def test_create_indices(elasticsearch_client) -> None:
+async def test_create_indices(
+    elasticsearch_client: AsyncElasticsearch,
+) -> None:
     async for ok, index in database.create_indices(elasticsearch_client):
         assert ok
         assert index == "movies"
 
 
 @pytest.mark.asyncio
-async def test_bulk_index(elasticsearch_client) -> None:
+async def test_bulk_index(elasticsearch_client: AsyncElasticsearch) -> None:
     async def create_documents() -> AsyncIterator[dict]:
         for year in range(1980, 2025):
             yield {"year": year}
