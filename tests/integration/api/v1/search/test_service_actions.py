@@ -4,6 +4,7 @@ from elasticsearch import AsyncElasticsearch
 from tntw.api.v1.search import service
 
 
+@pytest.mark.skip(reason="Requieres external resource")
 @pytest.mark.asyncio
 async def test_update_movies(elasticsearch_client: AsyncElasticsearch):
     await service.update_movies(client=elasticsearch_client)
