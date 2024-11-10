@@ -32,8 +32,8 @@ Then go to `http://localhost:8000`
   - [x] Build the seeding API crawler
   - [x] Define Elasticsearch Index schema
   - [x] Bulk upload to Elasticsearch
-- [ ] Add search endpoint
-  - [ ] No parameter behavior (full pagination?)
+- [x] Add search endpoint
+  - [x] No parameter behavior (full pagination?)
   - [ ] Add year filter
   - [ ] Add title filter
 - [ ] Snapshot testing

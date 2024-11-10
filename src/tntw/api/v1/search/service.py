@@ -13,3 +13,7 @@ async def update_movies(client: AsyncElasticsearch):
     return await bulk_index(
         documents=genitems(), index="movies", client=client
     )
+
+
+async def search_movies(client: AsyncElasticsearch):
+    return await client.search(index="movies")

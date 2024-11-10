@@ -25,9 +25,9 @@ def moviedata(moviedata_factory: Callable) -> MoviedataFixture:
 
 @pytest.mark.asyncio
 async def test_router_routes(
-    data_factory, app_client: TestClient, moviedata: MoviedataFixture
+    app_client: TestClient, moviedata: MoviedataFixture
 ) -> None:
-    moviedata.all.send(data_factory(pages=10))
+    moviedata.all.send(moviedata.generate_data(pages=10))
 
     response = app_client.put("/search/movies")
     assert response.status_code == 201
