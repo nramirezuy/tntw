@@ -25,3 +25,9 @@ router = APIRouter(prefix="/search", tags=["Search"], lifespan=lifespan)
 async def update_movies(elasticsearch_client: ElasticsearchClientDep):
     """Update movies index"""
     return await service.update_movies(client=elasticsearch_client)
+
+
+@router.get("/movies", status_code=status.HTTP_200_OK)
+async def search_movies(elasticsearch_client: ElasticsearchClientDep):
+    """Search movies"""
+    return await service.search_movies(client=elasticsearch_client)
