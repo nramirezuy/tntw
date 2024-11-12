@@ -15,5 +15,8 @@ async def update_movies(client: AsyncElasticsearch):
     )
 
 
-async def search_movies(client: AsyncElasticsearch):
-    return await client.search(index="movies")
+async def search_movies(
+    client: AsyncElasticsearch,
+    q: str | None = None,
+):
+    return await client.search(index="movies", q=q)

@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import APIRouter
 from fastapi import FastAPI
+from fastapi import Query
 from fastapi import status
 
 from ..database import create_indices
@@ -28,6 +29,11 @@ async def update_movies(elasticsearch_client: ElasticsearchClientDep):
 
 
 @router.get("/movies", status_code=status.HTTP_200_OK)
-async def search_movies(elasticsearch_client: ElasticsearchClientDep):
+async def search_movies(
+    elasticsearch_client: ElasticsearchClientDep,
+    q: str | None = Query(
+        None, description="Query in the Lucene query string syntax"
+    ),
+):
     """Search movies"""
-    return await service.search_movies(client=elasticsearch_client)
+    return await service.search_movies(client=elasticsearch_client, q=q)

@@ -34,8 +34,8 @@ Then go to `http://localhost:8000`
   - [x] Bulk upload to Elasticsearch
 - [x] Add search endpoint
   - [x] No parameter behavior (full pagination?)
-  - [ ] Add year filter
-  - [ ] Add title filter
+  - [x] Add year filter
+  - [x] Add title filter
 - [ ] Snapshot testing
 - [ ] What next?
 
